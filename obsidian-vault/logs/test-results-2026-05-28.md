@@ -117,3 +117,11 @@ cd /home/tekken/ELRS_Hybrid_Detector_Vault/ELRS_Hybrid_Detector_Vault/tests
 Копія: `/obsidian-vault/logs/test-results-2026-05-28.md`.
 
 _Run timestamp: 2026-05-28T09:54:11.869040Z_
+
+## Backlinks (Docs, D-1e)
+
+- Спеца: [[../docs/cfar-spec|cfar-spec]] §34-47 (параметри), §60-67 (gate-метрики), §45 (формула Pfa).
+- OOT-структура: [[../research/08-stage1-oscfar-cpp|08-stage1-oscfar-cpp]].
+- Лог рішень: [[decisions-log]] (P-08, A-04 — Pfa↔threshold).
+- Snapshot: [[progress-snapshots/2026-05-28-stage1-done|2026-05-28-stage1-done]].
+- Огляд: [[../00-overview/project-overview]], [[../00-overview/architecture]].

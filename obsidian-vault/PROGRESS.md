@@ -44,10 +44,18 @@
 - [x] **T-6** ✅ Test/QA вердикт: **PASS** → Оркестратор відкриває Крок 4 (D-1)
 
 ### Крок 4 — Документація (Docs)
-- [ ] **D-1** Оновити Obsidian: spec, рішення, результати
-- [ ] **D-2** Оновити `PROGRESS.md`
-- [ ] **D-3** GitHub README + commit notes
-- [ ] **D-4** Синхронізація завершена
+- [x] **D-1** Оновити Obsidian: spec, рішення, результати
+- [x] **D-2** Оновити `PROGRESS.md`
+- [x] **D-3** GitHub README + commit notes
+- [x] **D-4** Синхронізація завершена
+
+### ✅ Stage 1 — Definition of Done (per CLAUDE.md)
+- [x] C++ реалізація 2D OS-CFAR завершена (`cfar2d.hpp` / `cfar2d.cpp`)
+- [x] Throughput ≥ 80 MS/s — **86.27 MS/s** (parallel, 20 threads)
+- [x] Pfa ≤ 1% на синтетичних даних — **0 / 10.5M cells** (analytic 3.55e-11)
+- [x] Тести пройдені та задокументовані (`/tests/test-results.{md,json,png}`)
+- [x] Obsidian vault оновлений (00-overview/, logs/, progress-snapshots/)
+- [x] GitHub: коміти `308f60d` (C), `e3668ec` (T), D-4 (Docs sync)
 
 ---
 
@@ -70,3 +78,5 @@
 | 2026-05-28 | C++ Dev | C-1..C-5 done. Commit 308f60d. Throughput 89.96 MS/s (20 threads) / 14.10 MS/s single |
 | 2026-05-28 | Orchestrator | C-1..C-5 закрито. Призначено T-1 → Test/QA (БЛОКУЮЧИЙ gate) |
 | 2026-05-28 | Test/QA | T-1..T-6 done. **PASS**. Pfa MC=0/10.5M (analytic 3.55e-11) ≤ 1% ✅; Thrpt parallel=86.27 MS/s ≥ 80 ✅; Pd=1.0 @ SNR=−6dB. Артефакти у `/tests/` + `/obsidian-vault/logs/`. |
+| 2026-05-28 | Orchestrator | T-6 PASS верифіковано (commit e3668ec, `/src/` недоторкано). Призначено D-1 → Docs (фінал Stage 1) |
+| 2026-05-28 | Docs | D-1..D-4 done. Створено `00-overview/project-overview.md`, `00-overview/architecture.md`, `logs/decisions-log.md`, `logs/progress-snapshots/2026-05-28-stage1-done.md`, `/README.md`. Додано backlinks у `logs/test-results-2026-05-28.md` та `research/08-stage1-oscfar-cpp.md`. Stage 1 закрито. Чекліст `CLAUDE.md` звірено. |
