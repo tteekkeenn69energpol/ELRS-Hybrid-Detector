@@ -1,0 +1,11 @@
+# Obsidian workspace (per-user UI state, not project content)
+.obsidian/
+**/.obsidian/
+
+# Build artefacts
+build/
+*.so
+__pycache__/
+
+# Raw datasets / large source PDFs (indexed under research/ext-*.md instead)
+data/raw/

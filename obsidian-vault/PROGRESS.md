@@ -80,3 +80,5 @@
 | 2026-05-28 | Test/QA | T-1..T-6 done. **PASS**. Pfa MC=0/10.5M (analytic 3.55e-11) ≤ 1% ✅; Thrpt parallel=86.27 MS/s ≥ 80 ✅; Pd=1.0 @ SNR=−6dB. Артефакти у `/tests/` + `/obsidian-vault/logs/`. |
 | 2026-05-28 | Orchestrator | T-6 PASS верифіковано (commit e3668ec, `/src/` недоторкано). Призначено D-1 → Docs (фінал Stage 1) |
 | 2026-05-28 | Docs | D-1..D-4 done. Створено `00-overview/project-overview.md`, `00-overview/architecture.md`, `logs/decisions-log.md`, `logs/progress-snapshots/2026-05-28-stage1-done.md`, `/README.md`. Додано backlinks у `logs/test-results-2026-05-28.md` та `research/08-stage1-oscfar-cpp.md`. Stage 1 закрито. Чекліст `CLAUDE.md` звірено. |
+| 2026-05-28 | Knowledge Builder | KB-extra: 40 ext links → research/ext-*.md (3 dup skipped) |
+| 2026-05-28 | Docs | KB-extra sync + vault hygiene commit. Repo тепер повністю tracked. |

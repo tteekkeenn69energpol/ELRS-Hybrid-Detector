@@ -31,6 +31,8 @@ step: D-1c
 | P-08 | 2026-05-28 | Test/QA | T-1..T-6 done. **PASS**. Pfa MC=0/10.5M (analytic 3.55e-11) ≤ 1% ✅; Thrpt parallel=86.27 MS/s ≥ 80 ✅; Pd=1.0 @ SNR=−6 dB. Артефакти у `/tests/` + [[test-results-2026-05-28]]. Commit `e3668ec`. |
 | P-09 | 2026-05-28 | Orchestrator | T-6 PASS верифіковано (commit `e3668ec`, `/src/` недоторкано). Призначено D-1 → Docs (фінал Stage 1) |
 | P-10 | 2026-05-28 | Docs | D-1..D-4 done. Створено [[../00-overview/project-overview]], [[../00-overview/architecture]], [[decisions-log]], [[progress-snapshots/2026-05-28-stage1-done]], `/README.md`. PROGRESS.md закрито Stage 1. |
+| P-11 | 2026-05-28 | Knowledge Builder | **KB-extra**: 40 зовнішніх посилань оброблено → `research/ext-*.md`. Категорії: cfar-theory(8), lora-detection(3), drone-rf(6), cuda-gpu(8), github-cfar(6), github-gnuradio(3), ml-rf(4), fmcw(2). 3 дублікати виявлено й пропущено (stubs з redirect: ext-drone-rf-12 → [[../research/23-flak-czyba-distributed-sensor-grid]], ext-drone-rf-17 → [[../research/24-sorecau-wideband-usrp-rfnoc]], ext-fmcw-40 → [[../research/25-venter-sdr-pulse-doppler-gpu]]). Status: ready for Stage 2+ reference. Index — [[../research/sources#external-references-kb-extra-2026-05-28-40-зовнішніх-посилань\|sources § External References]]. |
+| P-12 | 2026-05-28 | Docs | KB-extra sync + vault hygiene commit. Додано `/.gitignore` (.obsidian/, build/, *.so, __pycache__/, data/raw/). Перенесено `/kb-extra-links-command.md` → `obsidian-vault/logs/`. Усі untracked .md у `obsidian-vault/` додано поіменно (без `git add -A`). Repo тепер повністю tracked. Ready for Stage 2. |
 
 ---
 
@@ -120,6 +122,27 @@ step: D-1c
   Stage 1.5 (опціонально, див. [[../research/17-gpu-stft-cfar-analysis]]).
 - **Layout:** row-major (час — рядок, частота — стовпець) для coalesced доступу
   та сумісності з майбутньою CUDA-міграцією.
+
+---
+
+## KB-extra (2026-05-28)
+
+Re-активація Knowledge Builder для індексації 40 зовнішніх посилань
+(після Stage 1 PASS). Артефакти — `obsidian-vault/research/ext-*.md`
+(40 файлів, 8 категорій), індекс — [[../research/sources|sources § External References]].
+
+Категорії: cfar-theory (8), lora-detection (3), drone-rf (6), cuda-gpu (8),
+github-cfar (6), github-gnuradio (3), ml-rf (4), fmcw (2).
+
+**Дублікати (3, stubs з redirect):**
+- `ext-drone-rf-12` → [[../research/23-flak-czyba-distributed-sensor-grid]]
+- `ext-drone-rf-17` → [[../research/24-sorecau-wideband-usrp-rfnoc]]
+- `ext-fmcw-40` → [[../research/25-venter-sdr-pulse-doppler-gpu]]
+
+**Статистика:** 33 done · 4 partial (paywall/anti-bot) · 1 unavailable (404).
+2 PDF додано у `data/raw/pdf/` (виключено з git через `.gitignore data/raw/`).
+
+Статус: ready for Stage 2+ reference (Blind Estimator / Dechirp / Neural Verifier).
 
 ---
 
