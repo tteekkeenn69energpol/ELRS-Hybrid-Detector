@@ -1,12 +1,11 @@
-# ELRS Hybrid Detector — Stage 1 (2D OS-CFAR)
+# ELRS Hybrid Detector — Stage 1 + Stage 2
 
 > Каскадний пайплайн виявлення, класифікації та картування **ELRS frequency-hopping
 > spread-spectrum (FHSS)** трафіку у смузі ISM 915 MHz.
 > Розробляється мультиагентною системою на **Claude Code** (6 агентів).
 
-**Status:** ✅ Stage 1 — **DONE** (2026-05-28).
-**Verdict (Test/QA):** **PASS** — Pfa = 0 / 10.5M cells (analytic 3.55e-11) ≤ 1%,
-Throughput = **86.27 MS/s** (parallel, 20 threads) ≥ 80 MS/s, Pd@−6 dB = 1.0.
+**Stage 1:** ✅ **DONE** (2026-05-28) — Pfa = 0 / 10.5M cells, Throughput = 86.27 MS/s.
+**Stage 2:** ✅ **DONE** (2026-06-03) — SF=91.9%, BW=94.9%, Pair=95.8%, Latency=11.4ms.
 
 ---
 
@@ -97,6 +96,40 @@ cd tests
 3. Генерує `test-results.{json,md,png}` (`plot_and_report.py`).
 4. Копіює звіт у `obsidian-vault/logs/test-results-2026-05-28.md`.
 
+---
+
+## Stage 2 — Blind Parameter Estimator (Welch PSD + Dechirp Matched Filter)
+
+**Status:** ✅ Done (2026-06-03). **Verdict: PASS.**
+
+| Метрика | Результат | Ціль | Статус |
+|---|---|---|---|
+| SF accuracy @ −10 dB | **91.9%** | ≥ 85% | ✅ |
+| BW accuracy @ −12 dB | **94.9%** | ≥ 80% | ✅ |
+| SF+BW pair @ −14 dB | **95.8%** | ≥ 78% | ✅ |
+| Latency (median) | **11.4 ms** | ≤ 25 ms | ✅ |
+| False Trigger Rate | **2.0%** | ≤ 5% | ✅ |
+
+### Архітектура
+
+- **BW estimation:** Welch PSD (`N_total=65536`, `N_fft=4096`, K=31 Hann frames) → per-class hypothesis test → `score[b]=mean(S_norm[0..b/2])/mean(S_norm[b/2..b])` → argmax.
+- **SF estimation:** Dechirp Matched Filter (6 гіпотез SF7..SF12) → `IQ×ref_down_chirp(sf_hat)` → FFT(`n=n_use`) → peak/mean score → argmax.
+- **Confidence gate:** пороги 0.4/0.7, holdoff 100 ms.
+
+### Залежності
+
+```bash
+cd src/stage2
+pip install -r requirements.txt   # numpy, scipy, pywt
+```
+
+Специфікація: `obsidian-vault/docs/stage2-dwt-spec.md` (approved-v8).
+Повний QA-звіт: `tests/stage2/test-results-stage2-2026-06-03-v8.md`.
+
+**Known Issue (non-blocking):** SF7/BW=812k @ SNR=−14 dB = 0/50 — BW estimation edge case при екстремально низькому SNR. Загальний pair=95.8% >> 78% target → PASS підтверджено. Зафіксовано для майбутнього виправлення.
+
+---
+
 ## Результати Stage 1 (2026-05-28)
 
 | Метрика | Результат | Ціль | Статус |
@@ -124,7 +157,7 @@ cd tests
 | Stage | Назва | Стан |
 |---|---|---|
 | 1 | 2D OS-CFAR trigger (C++/AVX2) | ✅ Done (2026-05-28) |
-| 2 | Blind Parameter Estimator (DWT/CWT, Python/CuPy) | ⏳ Planned |
+| 2 | Blind Parameter Estimator (Welch PSD + Dechirp MF, Python) | ✅ Done (2026-06-03) |
 | 3 | Dechirp + Matched Filter Bank | ⏳ Planned |
 | 4 | Neural Verifier (ONNX, EfficientNet-B3 / ViT-Small) | ⏳ Planned |
 | 4.5 | RF Fingerprinting + Decision Fusion + Hop-Map + FHSS Tracker | ⏳ Planned |
@@ -140,10 +173,12 @@ latency ≤ 50 ms.
 
 ## Документація
 
-- **Специфікація OS-CFAR:** [`obsidian-vault/docs/cfar-spec.md`](obsidian-vault/docs/cfar-spec.md)
+- **Специфікація OS-CFAR (Stage 1):** [`obsidian-vault/docs/cfar-spec.md`](obsidian-vault/docs/cfar-spec.md)
+- **Специфікація Blind Estimator (Stage 2):** [`obsidian-vault/docs/stage2-dwt-spec.md`](obsidian-vault/docs/stage2-dwt-spec.md)
 - **Огляд пайплайну:** [`obsidian-vault/docs/pipeline-overview.md`](obsidian-vault/docs/pipeline-overview.md)
 - **Архітектура агентів:** [`obsidian-vault/00-overview/architecture.md`](obsidian-vault/00-overview/architecture.md)
 - **Лог рішень:** [`obsidian-vault/logs/decisions-log.md`](obsidian-vault/logs/decisions-log.md)
+- **QA звіт Stage 2:** [`tests/stage2/test-results-stage2-2026-06-03-v8.md`](tests/stage2/test-results-stage2-2026-06-03-v8.md)
 - **Поточний стан:** [`obsidian-vault/PROGRESS.md`](obsidian-vault/PROGRESS.md)
 - **Правила агентів:** [`obsidian-vault/CLAUDE.md`](obsidian-vault/CLAUDE.md)
 

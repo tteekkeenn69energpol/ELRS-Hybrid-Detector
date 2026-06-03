@@ -53,6 +53,8 @@
 [ ] Додав запис у decisions-log.md
 [ ] Оновив PROGRESS.md (статус кроку → [x])
 [ ] Зробив коміт у GitHub
+# Після кожного коміту — push на GitHub
+git push origin main
 [ ] Повідомив Оркестратора: "Docs синхронізація завершена"
 ```
 
